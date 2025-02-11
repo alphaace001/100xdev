@@ -23,17 +23,28 @@
       return outerdiv;
     }
 
-    function Todo() {
-      const title = document.getElementById("title").value;
-      const desciption = document.getElementById("desciption").value;
+    async function createdynamictodo() {
+      const data = await fetch("http://localhost:3000/todo");
+      const jsondata = await data.json();
       const parent = document.getElementById("todo");
-      parent.appendChild(createchild(title, desciption, globalid++));
+      parent.innerHTML = "";
+      for (let i = 0; i < jsondata.length; i++) {
+        const child = createchild(
+          jsondata[i].title,
+          jsondata[i].description,
+          jsondata[i].id
+        );
+        document.getElementById("todo").appendChild(child);
+      }
     }
+
+    setInterval(() => {
+      createdynamictodo();
+    }, 5000);
   </script>
   <div>
     <input id="title" type="text" placeholder="title" /><br />
     <input id="desciption" type="text" placeholder="description" /><br />
-    <button onclick="Todo()">Add Todo</button>
     <div id="todo"></div>
   </div>
 </html>
