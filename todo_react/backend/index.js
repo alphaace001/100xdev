@@ -1,10 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const { createTodo, updatetodo } = require("./types");
 const { todo } = require("./db");
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 // body{
 // title:String,
 // description:String
