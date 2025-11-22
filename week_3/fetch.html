@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Fetch Example</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <script>
+        // function getAnimalData(){
+        //     const response = fetch("https://fakerapi.it/api/v1/persons")
+        //     .then(function(response){
+        //         response.json().then(function(data){
+        //             console.log(data);
+        //         })
+        //     })
+        //     // console.log(data);
+        // }
+
+        async function getAnimalData() {
+            data = await fetch("https://fakerapi.it/api/v1/persons");
+            data = await data.json();
+            console.log(data);
+        }
+    </script>
+    <button onclick="getAnimalData()">Get Animal Data</button>
+</body>
+</html>
