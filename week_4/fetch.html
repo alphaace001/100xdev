@@ -1,0 +1,46 @@
+<html>
+    <script>
+        let timeout;
+        // debouncing can be added to improve performance for rapid clicks
+        clearTimeout(timeout);
+        function debouncing(){
+            const timeout = setTimeout(()=>{
+                addNumbers();
+            },2000);
+        }
+        function addNumbers(){
+            var number1 = parseFloat(document.getElementById("num1").value);
+            var number2 = parseFloat(document.getElementById("num2").value);
+            var sum = fetch(`http://localhost:3000/add?a=${number1}&b=${number2}`)
+            const response = sum.then(response => response.json())
+            console.log(response)
+            const result = response.then(data => { 
+                console.log(data.sum) 
+                document.getElementById("result").innerHTML = "The sum is: " + data.sum;
+            })
+        }
+
+        async function asyncadd() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            const response = await fetch(`http://localhost:3000/add?a=${num1}&b=${num2}`);
+            const data = await response.json();
+            console.log(data.sum);
+            document.getElementById("result").innerHTML = "The sum is: " + data.sum;
+        }
+    </script>
+    <style>
+        .container{
+            background-color: lightblue;
+            font-size: medium;
+            padding: 20;
+            margin: 10;
+        }
+    </style>
+    <body>
+        <input class="container"  oninput="debouncing()" type="text" id="num1" placeholder="Enter first number"> <br><br>
+        <input class="container" oninput="debouncing()" type="text" id="num2" placeholder="Enter second number"> <br><br>
+        <!-- <button id="finalsum" onclick="asyncadd()">Add</button> -->
+        <div class="container" id="result"></div>
+    </body>
+</html>

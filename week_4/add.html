@@ -1,0 +1,25 @@
+<html>
+    <script>
+        function addNumbers(num1, num2){
+            var number1 = parseFloat(document.getElementById("num1").value);
+            var number2 = parseFloat(document.getElementById("num2").value);
+            var sum = number1 + number2;
+            document.getElementById("result").innerHTML = "The sum is: " + sum;
+            // return sum;
+        }
+    </script>
+    <style>
+        .container{
+            background-color: lightblue;
+            font-size: medium;
+            padding: 20;
+            margin: 10;
+        }
+    </style>
+    <body>
+        <input class="container" type="text" id="num1" placeholder="Enter first number"> <br><br>
+        <input class="container" type="text" id="num2" placeholder="Enter second number"> <br><br>
+        <button id="finalsum" onclick="addNumbers()">Add</button>
+        <div class="container" id="result"></div>
+    </body>
+</html>
