@@ -22,6 +22,23 @@ router.post('/signup', async(req, res) => {
     }
 });
 
+router.post("/signin",async (req,res)=>{
+    const username = req.body.username
+    const password = req.body.password
+
+    const data = await User.findOne({username, password})
+    if (data){
+        res.json({
+            token: jwt.sign({username},secret)
+        })
+    }else{
+        res.json({
+            message:"Invalid username or password"
+        })
+    }
+
+})
+
 router.get('/courses', async(req, res) => {
     try{
         const data = await Course.find({})

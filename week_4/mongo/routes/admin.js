@@ -1,7 +1,12 @@
 const {Router} = require("express")
+const jwt = require("jsonwebtoken")
+
 const adminMiddleware = require("../middleware/admin")
-const {Admin, Course} = require("../db")
+const {Admin, Course, User} = require("../db")
+const {secret} = require("../config")
 const router = Router()
+
+console.log(secret)
 
 router.post('/signup', (req, res) => {
     const username = req.body.username
@@ -22,6 +27,23 @@ router.post('/signup', (req, res) => {
         })
     })
 });
+
+router.post("/signin",async (req,res)=>{
+    const username = req.body.username
+    const password = req.body.password
+
+    const data = await Admin.findOne({username, password})
+    if (data){
+        res.json({
+            token: jwt.sign({username},secret)
+        })
+    }else{
+        res.json({
+            message:"Invalid username or password"
+        })
+    }
+
+})
 
 router.post('/courses', adminMiddleware, async(req, res) => {
     const title = req.body.title

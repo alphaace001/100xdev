@@ -1,10 +1,10 @@
 const express = require("express")
 const bodyParser = require("body-parser")
- 
 const app = express()
 
 const adminroutes = require("./routes/admin")
 const userrouter = require("./routes/user")
+const { model } = require("mongoose")
 
 app.use(bodyParser.json())
 app.use("/admin",adminroutes)
