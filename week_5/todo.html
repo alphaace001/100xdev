@@ -1,0 +1,48 @@
+<html>
+    <script>
+        var todo_id = 0;
+
+        function mark_done(id){
+            const todo_list = document.getElementById("todo_list");
+            const childdiv = todo_list.children[id-1];
+            childdiv.children[2].innerHTML = "DOne";
+        }
+
+        function create_div(title,description,id){
+            const childdiv = document.createElement("div");
+            const new_title = document.createElement("h3");
+            new_title.innerHTML = title;
+            const new_description = document.createElement("p");
+            new_description.innerHTML = description;
+            const new_button = document.createElement("button");
+            new_button.innerHTML = "Mark as Done";
+            new_button.setAttribute("onclick", `mark_done(${id})`);
+            childdiv.appendChild(new_title);
+            childdiv.appendChild(new_description);
+            childdiv.appendChild(new_button);
+            return childdiv;
+        }
+
+        function add_todo(){
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const todo_list = document.getElementById("todo_list");
+            todo_list.appendChild(create_div(title,description,todo_id+1));
+
+           
+
+            // const todo_list = document.getElementById("todo_list");
+            // todo_list.innerHTML += `
+            // <h3>${title}</h3>
+            // <p>${description}</p>
+            // <button> Mark as Done </button>
+            // `;
+        }
+    </script>
+    <div>
+        <input type="text" id="title" placeholder="title"><br><br>
+        <input type="text" id="description" placeholder="description"><br><br>
+        <button onclick="add_todo()">Add Todo</button><br><br>
+        <div id="todo_list">
+    </div>
+</html>
