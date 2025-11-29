@@ -1,6 +1,7 @@
 const express = require("express")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
+const cors = require("cors")
 const {User,Todo} = require("./database")
 const {usermiddleware,tokenverifier} = require("./middleware")
 
@@ -9,6 +10,7 @@ Secret = process.env.SECRET_KEY
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 app.post("/signup",async(req,res)=>{
     const username = req.body.username

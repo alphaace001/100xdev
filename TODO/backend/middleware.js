@@ -25,11 +25,8 @@ async function usermiddleware(req,res,next){
 
 async function tokenverifier(req,res,next){
     const token = req.headers.authorization
-    console.log(token)
     const data = token.split(" ")
     const jwt_token = data[1]
-    console.log(jwt_token)
-    console.log(jwt.decode(jwt_token))
     const is_valid = jwt.verify(jwt_token,Secret)
     if(is_valid.username){
         req.username = is_valid.username
