@@ -1,6 +1,7 @@
 import { useState,useContext } from 'react'
 import { CountContext } from './context'
 
+// context api is used for avoiding prop drilling but doesn't solve the problem of re rendering
 function App() {
   const [count, setCount] = useState(0)
 
@@ -42,9 +43,10 @@ return (
   )
 }
 
-function Count({setCount}) {
+function Count() {
+  console.log("Count Rendered")
   return (
-    <>
+  <>
     <CountRender />
     <Buttons/>
   </>
