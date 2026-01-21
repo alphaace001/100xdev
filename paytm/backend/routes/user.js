@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 
 const {JWT_SECRET} = require("../config")
 const {Signup,Signin,UpdateUser} = require("../zod")
-const { User } = require("../db")
+const { User,Account } = require("../db")
 const {authmiddleware} = require("../middleware/auth")
 const { email } = require("zod")
 
@@ -33,6 +33,12 @@ userrouter.post("/signup",async(req,res)=>{
             username:username,
             password:password
         })
+
+        await Account.create({
+            userID: result._id,
+            balance: 1 + Math.random()*10000
+        })
+        
         console.log(result)
         
         const token = jwt.sign({
