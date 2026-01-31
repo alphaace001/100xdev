@@ -12,7 +12,7 @@ const Signin = z.object({
 })
 
 const UpdateUser = z.object({
-    email:z.email().optional(),
+    email: z.email().optional(),
     username:z.string().optional(),
     password : z.string().min(3).optional()
 })

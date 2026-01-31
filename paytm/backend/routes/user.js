@@ -13,7 +13,8 @@ userrouter.post("/signup",async(req,res)=>{
     const data = Signup.safeParse(req.body)
 
     if (!data.success) {
-        return res.status(400).json(data.error.errors);
+        const messages = data.error.issues.map(issue => issue.message)
+        return res.status(400).json({"message": messages});
     }
 
     const email = data.data.email
